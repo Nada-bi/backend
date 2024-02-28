@@ -1,6 +1,5 @@
 package com.pfe.backend.config;
 
-import com.pfe.backend.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -28,21 +27,15 @@ public class JwtService {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
-  //  public String generatedToken(UserDetails userDetails){
-    //    return generatedToken( new HashMap<>(),
-      //          userDetails);
-   // }
-
-    private <K, V> String generatedToken(HashMap<K,V> kvHashMap, UserDetails userDetails) {
-        return generatedToken( new HashMap<>(),
-                userDetails);
-    }
-
+public String generateToken(UserDetails userDetails){
+      return   generateToken(new HashMap<>(),userDetails);
+}
     public String generateToken(
-            Map<String, Object> extraClaims)
+            Map<String, Object> extraClaims,
+            UserDetails userDetails
+    )
     
-    {
-        PasswordValidationCallback userDetails = null;
+       {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
